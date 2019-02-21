@@ -6,3 +6,5 @@ This is a fancy and interactive dashboard to
 3. Perform position dependent conversion analysis (suppose one user is now at some funnel, what is the possibility for the user to reach the final conversion – again, one can customize conversion)?
 
 This dashboard initially aims to help us understand how users utilize/interact with our mobile APP and supply insights on APP diagnosis. 
+
+See Demo here: https://pzhang.shinyapps.io/Path_Analysis/
