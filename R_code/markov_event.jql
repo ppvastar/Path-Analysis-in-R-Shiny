@@ -1,0 +1,57 @@
+function get_device(event) {
+if (event.properties["Mobile"] == "TRUE" ) {return "mobile";}
+else if (event.properties["Tablet"] == "TRUE" ) {return "tablet";}
+else {return "desktop"}
+}
+
+function array_unique(arr) {
+    var result = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (result.indexOf(arr[i]) == -1) {
+            result.push(arr[i]);
+        }
+    }
+    return result;
+}
+
+
+function event_match(event){   
+  var events=events_list; 
+  if(events.indexOf(event)>-1) {return true;}
+  else{return false;}
+}
+
+function id_match(id){   
+  var users=user_list; 
+  if(users.indexOf(id)>-1) {return true;}
+  else{return false;}
+}
+
+
+
+params = {
+  start_date: "date_par",
+  end_date: "date_par",
+  events: events_list,
+};
+
+
+function main() 
+{
+  return Events({
+  from_date: params.start_date,
+  to_date: params.end_date,
+  event_selectors: _.map(params.events, event => ({event: event}))
+  })
+  /*.filter(function(event) {return event.properties["UserMarket"]=="KR" && id_match(event.distinct_id)}) */
+  .filter(function(event) {return event.properties["UserMarket"]=="market_par" }) 
+  .map(event => {return  {
+    /*body_begin*/
+    market:event.properties["UserMarket"],
+    event:event.name,
+    time: String(event.time),
+    user_id:event.distinct_id,
+    nexttab:event.properties["NextTabName"],
+    /*body_end*/
+};})
+}
